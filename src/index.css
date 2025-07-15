@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Ensure full viewport coverage and prevent white spaces */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+/* Prevent any scrolling issues that might show white space */
+* {
+  box-sizing: border-box;
+}
