@@ -32,8 +32,16 @@ function StoryScreen({ username }) {
 
   return (
     <div
-      className="bg-cover bg-no-repeat bg-center min-h-screen font-sans text-white"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
+      className="bg-cover bg-no-repeat bg-center bg-fixed min-h-screen w-full font-sans text-white"
+      style={{ 
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        width: '100vw',
+        minHeight: '100vh'
+      }}
     >
       {/* Top Story Intro */}
       <section className="min-h-screen flex flex-col items-center justify-center text-center px-6">

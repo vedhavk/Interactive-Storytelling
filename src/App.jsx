@@ -1,12 +1,10 @@
 import React from "react";
 import StartStory from "./components/StartStory";
 
-
 function App() {
   return (
-    <div>
+    <div className="w-full">
       <StartStory />
-      
     </div>
   );
 }
