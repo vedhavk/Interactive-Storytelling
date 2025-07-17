@@ -13,12 +13,12 @@ app.use(express.json());
 const storyRoutes = require('./routes/story');
 app.use('/api/story', storyRoutes);
 
-// Basic route
+// Basic test route
 app.get('/', (req, res) => {
   res.json({ message: 'TaleCraft Server is running!' });
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

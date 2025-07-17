@@ -4,11 +4,13 @@ import popup from "../assets/popup.jpg";
 import StoryScreen from "./StoryScreen";
 import backgroundImage from "../assets/grandpa.png";
 
+
 function StartStory() {
   const [username, setUsername] = useState("");
   const [started, setStarted] = useState(false);
   const [showStoryScreen, setShowStoryScreen] = useState(false);
   const elephantRef = useRef(null);
+  
 
   const handleStart = () => {
     if (username.trim() !== "") {

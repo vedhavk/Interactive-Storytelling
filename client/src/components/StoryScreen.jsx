@@ -7,15 +7,33 @@ gsap.registerPlugin(ScrollTrigger);
 
 function StoryScreen({ username }) {
   const scrollRef = useRef(null);
-  const choiceRef = useRef(null);
   const [choiceMade, setChoiceMade] = useState(null);
+  const [story, setStory] = useState("");         // NEW: For displaying story
+  const [loading, setLoading] = useState(false);  // NEW: To show loading state
 
-  const handleChoice = (choice) => {
+  const handleChoice = async (choice) => {
     setChoiceMade(choice);
+    setLoading(true);
+    setStory("");
+
+    try {
+      const res = await fetch("http://localhost:5000/api/story", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ genre: choice }),
+      });
+
+      const data = await res.json();
+      setStory(data.story);
+    } catch (error) {
+      console.error("Error fetching story:", error);
+      setStory("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    // Scroll Down Text Animation (infinite up-down)
     gsap.fromTo(
       scrollRef.current,
       { y: 10, opacity: 0.5 },
@@ -33,92 +51,75 @@ function StoryScreen({ username }) {
   return (
     <div
       className="bg-cover bg-no-repeat bg-center bg-fixed min-h-screen w-full font-sans text-white"
-      style={{ 
+      style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundAttachment: 'fixed',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        backgroundRepeat: 'no-repeat',
-        width: '100vw',
-        minHeight: '100vh'
+        backgroundAttachment: "fixed",
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+        width: "100vw",
+        minHeight: "100vh",
       }}
     >
-      {/* Top Story Intro */}
+      {/* Top Section */}
       <section className="min-h-screen flex flex-col items-center justify-center text-center px-6">
-        <h2
-          className="text-3xl font-bold text-white mb-4"
-          style={{ color: "white" }}
-        >
-          Welcome, {username}!
-        </h2>
-        <p className="text-lg max-w-lg text-white" style={{ color: "white" }}>
+        <h2 className="text-3xl font-bold mb-4">Welcome, {username}!</h2>
+        <p className="text-lg max-w-lg">
           You wake up in a misty forest. The air is cool. You hear strange
           sounds in the distance...
         </p>
-
-        {/* Scroll Down Arrow */}
         <div
           ref={scrollRef}
-          className="mt-10 text-white font-medium animate-bounce"
-          style={{ color: "white" }}
+          className="mt-10 font-medium animate-bounce"
         >
           ↓ Scroll Down ↓
         </div>
       </section>
 
-      {/* Story Choice Section */}
+      {/* Choice Section */}
       <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-black/60">
-        <h3
-          className="text-3xl font-bold text-white mb-12"
-          style={{ color: "white" }}
-        >
-          Choose Your Story Path
-        </h3>
+        <h3 className="text-3xl font-bold mb-12">Choose Your Story Path</h3>
 
         <div className="flex gap-20 items-center justify-center">
-          {/* Funny Story Option - Now on Left */}
           <div
             className="cursor-pointer group w-64"
             onClick={() => handleChoice("funny")}
           >
             <div className="bg-yellow-600/80 p-8 rounded-xl shadow-2xl transform transition-all duration-300 group-hover:scale-110">
               <span className="text-6xl mb-6 block">😄</span>
-              <h4
-                className="text-2xl font-bold text-white mb-3"
-                style={{ color: "white" }}
-              >
-                Funny Story
-              </h4>
-              <p className="text-white text-lg" style={{ color: "white" }}>
-                Time for some laughs.....
-              </p>
+              <h4 className="text-2xl font-bold mb-3">Funny Story</h4>
+              <p className="text-lg">Time for some laughs.....</p>
             </div>
           </div>
 
-          {/* Horror Story Option - Now on Right */}
           <div
             className="cursor-pointer group w-64"
             onClick={() => handleChoice("horror")}
           >
             <div className="bg-red-900/80 p-8 rounded-xl shadow-2xl transform transition-all duration-300 group-hover:scale-110">
               <span className="text-6xl mb-6 block">👻</span>
-              <h4
-                className="text-2xl font-bold text-white mb-3"
-                style={{ color: "white" }}
-              >
-                Horror Story
-              </h4>
-              <p className="text-white text-lg" style={{ color: "white" }}>
-                Dare to face your fears...
-              </p>
+              <h4 className="text-2xl font-bold mb-3">Horror Story</h4>
+              <p className="text-lg">Dare to face your fears...</p>
             </div>
           </div>
         </div>
 
+        {/* Choice Display */}
         {choiceMade && (
-          <div className="mt-12 text-2xl text-white font-bold animate-fade-in" style={{ color: "white" }}>
-            You chose: {choiceMade === "funny" ? "Funny Story" : "Horror Story"}
-            !
+          <div className="mt-12 text-2xl font-bold">
+            You chose: {choiceMade === "funny" ? "Funny Story" : "Horror Story"}!
+          </div>
+        )}
+
+        {/* Loading Spinner */}
+        {loading && (
+          <div className="mt-6 text-lg italic animate-pulse">Generating your story...</div>
+        )}
+
+        {/* Display Story */}
+        {story && !loading && (
+          <div className="mt-12 max-w-2xl bg-white/10 p-6 rounded-xl text-lg leading-relaxed">
+            {story}
           </div>
         )}
       </section>
