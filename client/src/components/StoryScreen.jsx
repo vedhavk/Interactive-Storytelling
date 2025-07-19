@@ -22,7 +22,7 @@ function StoryScreen({ username }) {
 
     try {
       console.log("Fetching story from API...");
-      const res = await fetch("https://interactive-storytelling-backend.onrender.com", {
+      const res = await fetch("http://localhost:5000/api/story", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ genre: choice }),
