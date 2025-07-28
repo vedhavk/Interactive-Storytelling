@@ -6,15 +6,15 @@ Welcome to **TaleCraft**, an interactive web application where users can create,
 
 ## 🌐 Live Website
 
-🔗 [Visit TaleCraft](https://your-deployed-site-link.com)  
-> *(Replace this with your actual deployment link - Netlify, Vercel, etc.)*
+🔗 [Visit TaleCraft](https://interactive-storytelling-frontend.onrender.com/)  
+
 
 ---
 
 ## 📸 Preview
 
-![TaleCraft Screenshot](https://your-screenshot-link.com)  
-> *(Optional: Upload preview screenshots to GitHub or use a public image link)*
+![TaleCraft Screenshot](https://ibb.co/1JdGQqTb)  
+
 
 ---
 
@@ -24,12 +24,11 @@ Welcome to **TaleCraft**, an interactive web application where users can create,
 - ⚛️ React.js  
 - 🎨 Tailwind CSS  
 - 🎞️ GSAP (for animations)  
-- 🌐 Axios
+  
 
 ### Backend
 - 🟩 Node.js  
 - ⚙️ Express.js  
-- 🍃 MongoDB (via Mongoose)  
 - 🔐 dotenv  
 - 🤖 OpenAI API
 
@@ -63,7 +62,7 @@ TaleCraft/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/talecraft.git
+git clone https://github.com/vedhavk/virtual-plant-making
 cd talecraft
 ```
 
@@ -86,7 +85,6 @@ Create a `.env` file in the `server/` directory based on `.env.example`:
 
 ```env
 OPENAI_API_KEY=your_openai_key
-MONGO_URI=your_mongo_connection_string
 PORT=5000
 ```
 
@@ -101,11 +99,7 @@ npm run dev
 ## ✨ Features
 
 - 🧠 AI-generated stories using OpenAI
-- ✍️ Manual story creation & editing
-- 📚 Browse stories by genre or keyword
-- ❤️ Like and bookmark stories
-- 🔐 User authentication system
-- 📱 Fully responsive UI
+
 
 ---
 
@@ -152,17 +146,13 @@ Contributions are welcome!
 
 ---
 
-## 📄 License
 
-This project is licensed under the **MIT License**.  
-See the [`LICENSE`](./LICENSE) file for more details.
 
 ---
 
 ## 🙏 Acknowledgements
 
 - [OpenAI](https://platform.openai.com/)
-- [MongoDB](https://www.mongodb.com/)
 - [React](https://reactjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [GSAP](https://greensock.com/gsap/)
